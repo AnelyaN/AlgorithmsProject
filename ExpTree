@@ -1,0 +1,67 @@
+// implementation in c++ from book
+// reference: https://www.ijcaonline.org/volume24/number3/pxc3873876.pdf
+
+
+#include<iostream>
+using namespace std;
+struct node
+{
+    int level;
+    int count;
+    node **child;
+    int data[];
+
+};
+int binary_search(node *ptr,int element)
+{
+    if(element>ptr->data[ptr->count-1]) return ptr->count;
+    int start=0;
+    int end=ptr->count-1;
+    int mid=start+(end-start)/2;
+    while(start<end)
+    {
+        if(element>ptr->data[mid]) { start=mid+1;}
+        else
+        {
+            end=mid;
+        }
+
+        mid=start+(end-start)/2;
+
+    }
+
+    return mid;
+}
+void insert(node *root,int element)
+{
+    node *ptr=root,*parent=NULL;
+    int i=0;
+    while(ptr!=NULL)
+    {
+
+        int level=ptr->level,count=ptr->count;
+        i=binary_search(ptr,element);
+        if(count<level){
+            for(int j=count;j<=i-1;j--)
+                ptr->data[j]=ptr->data[j-1];
+        }
+            ptr->data[i]=element;
+            ptr->count=count+1;
+            return ;
+
+        }
+
+    parent=ptr,ptr=ptr->child[i];
+
+    //Create a new Exponential Node at ith child of parent and
+//insert element in that
+
+    return ;
+
+}
+int main()
+{
+
+
+return 0;
+}
